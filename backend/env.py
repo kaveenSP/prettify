@@ -1,0 +1,1 @@
+MONGO_URI = "mongodb+srv://USERNAME:PASSW0RD@cluster0-abcde.azure.mongodb.net/cocktails?retryWrites=true&w=majority"
