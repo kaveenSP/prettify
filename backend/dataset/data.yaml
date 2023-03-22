@@ -1,0 +1,5 @@
+train: /kaggle/input/acne-dataset/train/images
+val: /kaggle/input/acne-dataset/valid/images
+
+nc: 12
+names: ['acne_scars', 'blackhead', 'cystic', 'flat_wart', 'folliculitis', 'keloid', 'milium', 'papular', 'purulent', 'sebo-crystan-conglo', 'syringoma', 'whitehead']
