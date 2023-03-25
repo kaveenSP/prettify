@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
@@ -42,14 +43,6 @@ class _LoginScreenState extends State<LoginScreen> {
               HexColor("#F7C8E0")
             ],
           ),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-            image: const NetworkImage(
-              'https://mir-s3-cdn-cf.behance.net/project_modules/fs/01b4bd84253993.5d56acc35e143.jpg',
-            ),
-          ),
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -58,23 +51,22 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                      const Color.fromARGB(255, 236, 118, 174).withOpacity(0.4),
+                  color: const Color.fromARGB(255, 236, 118, 174),
                   child: Container(
                     width: 400,
-                    padding: const EdgeInsets.all(40.0),
+                    padding: const EdgeInsets.all(40),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         FadeAnimation(
                           delay: 0.8,
-                          child: Image.network(
-                            "https://cdni.iconscout.com/illustration/premium/thumb/job-starting-date-2537382-2146478.png",
-                            width: 100,
-                            height: 100,
+                          child: Lottie.network(
+                            'https://assets4.lottiefiles.com/packages/lf20_1t8na1gy.json',
+                            width: 150,
+                            height: 150,
                           ),
                         ),
                         const SizedBox(
@@ -85,8 +77,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             "Please log in to continue",
                             style: TextStyle(
-                              fontSize: 22,
-                                color: Colors.black, letterSpacing: 0.5),
+                                fontSize: 22,
+                                color: Colors.black,
+                                letterSpacing: 0.5),
                           ),
                         ),
                         const SizedBox(
@@ -219,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 // }));
                               },
                               style: TextButton.styleFrom(
-                                  backgroundColor: Color(0xF7C8E0),
+                                  backgroundColor: Color(0x95BDFFff),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
                                   shape: RoundedRectangleBorder(
@@ -255,9 +248,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         return ForgotPasswordScreen();
                       }));
                     }),
-                    child: Text("Can't Log In?",
+                    child: const Text("Can't Log In?",
                         style: TextStyle(
-                          color: Colors.black.withOpacity(0.9),
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
                           letterSpacing: 0.5,
                         )),
                   ),
@@ -272,6 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text("Don't have an account? ",
                           style: TextStyle(
                             color: Colors.black54,
+                            fontSize: 18,
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -287,7 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.black.withOpacity(0.9),
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
-                                fontSize: 14)),
+                                fontSize: 18)),
                       ),
                     ],
                   ),

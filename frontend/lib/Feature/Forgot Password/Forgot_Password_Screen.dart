@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../Core/Animation/Fade_Animation.dart';
 import '../../Core/Colors/Hex_Color.dart';
@@ -17,7 +18,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Color enabledtxt = Colors.white;
   Color deaible = Colors.grey;
   Color backgroundColor = const Color(0xFF1F1A30);
-  bool  ispasswordev = true;
+  bool ispasswordev = true;
 
   FormData? selected;
 
@@ -33,18 +34,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
+              HexColor("#B4E4FF").withOpacity(0.8),
+              HexColor("#F7C8E0"),
+              HexColor("#B4E4FF"),
+              HexColor("#F7C8E0")
             ],
           ),
           image: DecorationImage(
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-            image: const NetworkImage(
-              'https://mir-s3-cdn-cf.behance.net/project_modules/fs/01b4bd84253993.5d56acc35e143.jpg',
+            image: NetworkImage(
+              'https://assets7.lottiefiles.com/private_files/lf30_GjhcdO.json',
             ),
           ),
         ),
@@ -55,8 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                      const Color.fromARGB(255, 171, 211, 250).withOpacity(0.4),
+                  color: const Color.fromARGB(255, 236, 118, 174),
                   child: Container(
                     width: 400,
                     padding: const EdgeInsets.all(40.0),
@@ -68,8 +68,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       children: [
                         FadeAnimation(
                           delay: 0.8,
-                          child: Image.network(
-                            "CsDWgAcAB4AIABhwGIAe4FkgEDMC42mAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=47QdZMnBI9GM8QOuvbmICw&bih=656&biw=1396&rlz=1C1GCEU_en-GBLK1045LK1045#imgrc=05tMcxFCgSEOiM",
+                          child: Lottie.network(
+                            'https://assets7.lottiefiles.com/private_files/lf30_GjhcdO.json',
                             width: 100,
                             height: 100,
                           ),
@@ -116,7 +116,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 prefixIcon: Icon(
                                   Icons.email_outlined,
                                   color: selected == FormData.Email
-                                      ? enabledtxt : deaible,
+                                      ? enabledtxt
+                                      : deaible,
                                   size: 20,
                                 ),
                                 hintText: 'Email',
@@ -147,21 +148,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
                                   return const PinCodeVerificationScreen(
-                                    phoneNumber: '0102756960',
+                                    phoneNumber: '',
                                   );
                                 }));
                               },
                               child: Text(
                                 "Continue",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   letterSpacing: 0.5,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               style: TextButton.styleFrom(
-                                  backgroundColor: const Color(0xFF2697FF),
+                                  backgroundColor: Color(0x95BDFFff),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
                                   shape: RoundedRectangleBorder(
@@ -198,7 +199,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             return LoginScreen();
                           }));
                         },
-                        child: Text("Sing in",
+                        child: Text("Sign in",
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
                                 fontWeight: FontWeight.bold,

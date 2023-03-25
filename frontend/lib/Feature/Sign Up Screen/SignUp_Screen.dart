@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
-import '../../../Core/Animation/Fade_Animation.dart';
-import '../../../Core/Colors/Hex_Color.dart';
+import '../../Core/Animation/Fade_Animation.dart';
+import '../../Core/Colors/Hex_Color.dart';
 import '../Login Screen/Login_Screen.dart';
 
 enum FormData { Name, Phone, Email, Gender, password, ConfirmPassword }
@@ -36,19 +37,11 @@ class _SignupScreenState extends State<SignupScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
+              HexColor("#B4E4FF").withOpacity(0.8),
+              HexColor("#F7C8E0"),
+              HexColor("#B4E4FF"),
+              HexColor("#F7C8E0")
             ],
-          ),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
-            image: const NetworkImage(
-              'https://mir-s3-cdn-cf.behance.net/project_modules/fs/01b4bd84253993.5d56acc35e143.jpg',
-            ),
           ),
         ),
         child: Center(
@@ -59,7 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 Card(
                   elevation: 5,
                   color:
-                      const Color.fromARGB(255, 171, 211, 250).withOpacity(0.4),
+                      const Color.fromARGB(255, 222, 88, 138).withOpacity(0.7),
                   child: Container(
                     width: 400,
                     padding: const EdgeInsets.all(40.0),
@@ -71,8 +64,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       children: [
                         FadeAnimation(
                           delay: 0.8,
-                          child: Image.network(
-                            "https://cdni.iconscout.com/illustration/premium/thumb/job-starting-date-2537382-2146478.png",
+                          child: Lottie.network(
+                            'https://assets2.lottiefiles.com/packages/lf20_mjlh3hcy.json',
                             width: 100,
                             height: 100,
                           ),
@@ -86,7 +79,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Text(
                               "Create your account",
                               style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.black,
+                                  fontSize: 22,
                                   letterSpacing: 0.5),
                             ),
                           ),
@@ -382,22 +376,22 @@ class _SignupScreenState extends State<SignupScreen> {
                           delay: 1,
                           child: TextButton(
                               onPressed: () {},
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  letterSpacing: 0.5,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
                               style: TextButton.styleFrom(
-                                  backgroundColor: const Color(0xFF2697FF),
+                                  backgroundColor: const Color(0x95BDFFff),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(12.0)))),
+                                          BorderRadius.circular(12.0))),
+                              child: const Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  letterSpacing: 0.5,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
                         ),
                       ],
                     ),
@@ -418,7 +412,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       const Text("If you have an account ",
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black54,
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -429,9 +423,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             return LoginScreen();
                           }));
                         },
-                        child: Text("Sing in",
+                        child: Text("Sign in",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
                                 fontSize: 14)),
