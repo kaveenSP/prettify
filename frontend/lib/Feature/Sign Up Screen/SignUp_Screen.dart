@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Core/Animation/Fade_Animation.dart';
-import '../../Core/Colors/Hex_Color.dart';
+import '../../../Core/Animation/Fade_Animation.dart';
+import '../../../Core/Colors/Hex_Color.dart';
 import '../Login Screen/Login_Screen.dart';
 
 enum FormData { Name, Phone, Email, Gender, password, ConfirmPassword }
