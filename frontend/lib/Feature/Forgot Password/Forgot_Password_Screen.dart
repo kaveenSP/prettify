@@ -83,7 +83,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             child: Text(
                               "Let us help you",
                               style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.black.withOpacity(0.9),
+                                  fontSize: 20,
                                   letterSpacing: 0.5),
                             ),
                           ),
@@ -157,7 +158,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 style: TextStyle(
                                   color: Colors.black,
                                   letterSpacing: 0.5,
-                                  fontSize: 16.0,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -188,9 +189,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     children: [
                       const Text("Want to try again? ",
                           style: TextStyle(
-                            color: Colors.grey,
-                            letterSpacing: 0.5,
-                          )),
+                              color: Colors.black54,
+                              letterSpacing: 0.5,
+                              fontSize: 18)),
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
@@ -201,10 +202,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         },
                         child: Text("Sign in",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black.withOpacity(0.9),
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
-                                fontSize: 14)),
+                                fontSize: 18)),
                       ),
                     ],
                   ),
