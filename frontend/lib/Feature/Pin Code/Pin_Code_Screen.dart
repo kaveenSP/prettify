@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../Core/Animation/Fade_Animation.dart';
@@ -61,16 +62,16 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#4b4293").withOpacity(0.8),
-              HexColor("#4b4293"),
-              HexColor("#08418e"),
-              HexColor("#08418e")
+              HexColor("#B4E4FF"),
+              HexColor("#F7C8E0"),
+              HexColor("#B4E4FF"),
+              HexColor("#F7C8E0")
             ],
           ),
           image: DecorationImage(
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-                HexColor("#fff").withOpacity(0.2), BlendMode.dstATop),
+                HexColor("#fff").withOpacity(0), BlendMode.dstATop),
             image: const NetworkImage(
               'https://mir-s3-cdn-cf.behance.net/project_modules/fs/01b4bd84253993.5d56acc35e143.jpg',
             ),
@@ -83,8 +84,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                      const Color.fromARGB(255, 171, 211, 250).withOpacity(0.4),
+                  color: const Color.fromARGB(255, 236, 118, 174),
                   child: Container(
                     width: 500,
                     padding: const EdgeInsets.all(30.0),
@@ -96,8 +96,8 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                       children: [
                         FadeAnimation(
                           delay: 0.8,
-                          child: Image.network(
-                            "https://cdni.iconscout.com/illustration/premium/thumb/job-starting-date-2537382-2146478.png",
+                          child: Lottie.network(
+                            'https://assets5.lottiefiles.com/packages/lf20_Mbg0iw.json',
                             width: 100,
                             height: 100,
                           ),
@@ -111,7 +111,8 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                             child: Text(
                               "Let us help you",
                               style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.black.withOpacity(0.9),
+                                  fontSize: 20,
                                   letterSpacing: 0.5),
                             ),
                           ),
@@ -244,7 +245,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                               child: const Text(
                                 "RESEND",
                                 style: TextStyle(
-                                    color: Color(0xFF91D3B3),
+                                    color: Color(0xffffffff),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
                               ),
@@ -274,22 +275,22 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                                   );
                                 }
                               },
-                              child: Text(
-                                "Verify",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  letterSpacing: 0.5,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
                               style: TextButton.styleFrom(
-                                  backgroundColor: const Color(0xFF2697FF),
+                                  backgroundColor: const Color(0x95BDFFff),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(12.0)))),
+                                          BorderRadius.circular(12.0))),
+                              child: const Text(
+                                "Verify",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  letterSpacing: 0.5,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
                         ),
                       ],
                     ),
@@ -310,7 +311,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                     children: [
                       const Text("Want to try again? ",
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black54,
                             letterSpacing: 0.5,
                           )),
                       GestureDetector(
@@ -321,9 +322,9 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                             return LoginScreen();
                           }));
                         },
-                        child: Text("Sing in",
+                        child: Text("Sign in",
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.black.withOpacity(0.9),
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 0.5,
                                 fontSize: 14)),
