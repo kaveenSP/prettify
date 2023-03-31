@@ -1,4 +1,4 @@
-import 'dart:io';
+import'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,8 +34,8 @@ class _imagepickerscreenState extends State<imagepickerscreen> {
       body: Center(
         child: Column(
           children: [
-            _image != null ? Image.file(_image!,width: 250, height: 250, fit: BoxFit.cover,)  :Image.network(
-                'https://images.unsplash.com/flagged/1/apple-gear-looking-pretty.jpg?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'),
+            _image != null ? Image.file(_image!,width: 250, height: 250, fit: BoxFit.cover,)  :Image.asset(
+                'images/screen.jpg'),
             SizedBox(
               height: 30,
             ),
