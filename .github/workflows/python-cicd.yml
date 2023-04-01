@@ -1,4 +1,4 @@
-name: Python CI Workflow
+name: Python CI/CD Workflow
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
       - 'backend/**'
 
 jobs:
-  run-python-script:
+  prettify-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,4 +30,12 @@ jobs:
           pip install -r backend/requirements.txt
 
       - name: Run Python script
-        run: python main.py
+        run: python app.py
+
+      - name: Build & Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with:
+          image: kaveensp/prettify-docker
+          registry: docker.io
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
