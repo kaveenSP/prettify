@@ -1,9 +1,13 @@
+import 'dart:io';
+import 'package:path/path.dart' as path;
 import 'dart:ui';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prettify1/imagepickerscreen.dart';
 import 'package:prettify1/util/category_card.dart';
+import 'package:http/http.dart' as http;
 
 import 'navigation_drawer.dart';
 import 'package:lottie/lottie.dart';
@@ -18,6 +22,65 @@ void main() {
 
 class Home extends StatelessWidget {
   const Home({super.key});
+
+  Future<void> getImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    // Do something with the picked image file
+    if (pickedFile != null) {
+      print(pickedFile.path);
+      // Create a multipart request using the http.MultipartRequest class
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://example.com/upload'), // replace with your API endpoint
+      );
+
+      // Add the image to the request as a file
+      final file = File(pickedFile.path);
+      final stream = http.ByteStream(file.openRead());
+      final length = await file.length();
+      final multipartFile = http.MultipartFile('image', stream, length,
+          filename: path.basename(file.path));
+      request.files.add(multipartFile);
+
+      // Send the request
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Handle the response from the backend
+        // ...
+      } else {
+        // Handle errors
+        // ...
+      }
+    }
+  }
+
+
+  // DELETE ACCOUNT FLUTTER SERVICE
+
+Future<void> deleteAccount(String email) async {
+  final response = await http.delete(Uri.parse('https://your-api-endpoint/users/$email'));
+  if (response.statusCode == 200) {
+    print('Account deleted successfully');
+  } else {
+    throw Exception('Failed to delete account: ${response.statusCode}');
+  }
+}
+  //END OF DELETE ACCOUNT FLUTTER SERVICE
+
+
+  Future<void> getCameraImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+   // Do something with the picked image file
+    if (pickedFile != null) {
+      print(pickedFile.path);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +100,51 @@ class Home extends StatelessWidget {
             child: Container(
               height: size.height * 0.38,
               width: size.width,
-              child: Row(
+              // child: Row(
+              //   children: [
+              //     Container(
+              //       alignment: Alignment.bottomLeft,
+              //       padding: EdgeInsets.only(top: 50, left: 0),
+              //       child: Image.asset("images/imgdes.png"),
+              //     ),
+              //   ],
+              // ),
+
+              child: Stack(
                 children: [
                   Container(
-                    alignment: Alignment.bottomLeft,
-                    padding: EdgeInsets.only(top: 50, left: 10),
-                    child: Image.asset(
-                      'images/manfly.png',
-                      height: 300,
-                      width: 270,
+                    height: 230,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          "images/imgdes.png",
+                        ),
+                        alignment: Alignment.bottomCenter,
+                      ),
+                    ),
+                    margin: EdgeInsets.only(top: 90),
+                  ),
+                  Positioned(
+                    top: 40,
+                    left: 50,
+                    child: Text(
+                      "Welcome To Prettify",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
+
               decoration: BoxDecoration(
-                  color: Colors.pink[100],
+                  color: Color(0xFFF8BBD0),
                   image: DecorationImage(
-                      alignment: Alignment.centerLeft,
-                      image: AssetImage("images/undraw.png")),
+                    alignment: Alignment.centerLeft,
+                    image: AssetImage("images/undraw.png"),
+                  ),
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
@@ -64,7 +154,7 @@ class Home extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 10,
+            height: 5,
           ),
 
           //card in the main page
@@ -73,16 +163,15 @@ class Home extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.pink[100],
+                color: Color(0xFFF8BBD0),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
                 children: [
                   Container(
-                    height: 100,
-                    width: 100,
-                    child: Image.asset('images/undraw.png')
-                  ),
+                      height: 100,
+                      width: 100,
+                      child: Image.asset('images/cardimg.png')),
                   SizedBox(
                     width: 20,
                   ),
@@ -97,6 +186,9 @@ class Home extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
                           'Prettify will help you for that, Join with us today !',
                           style: TextStyle(
@@ -104,20 +196,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 12,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple[200],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Read More ',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
+                          height: 25,
                         ),
                       ],
                     ),
@@ -127,7 +206,7 @@ class Home extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 25,
           ),
           Padding(
             padding: const EdgeInsets.only(right: 0),
@@ -157,7 +236,7 @@ class Home extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 24,
+            height: 20,
           ),
 
           //new button bar
@@ -171,12 +250,14 @@ class Home extends StatelessWidget {
               children: <Widget>[
                 ElevatedButton(
                   style: buttonPrimary = ElevatedButton.styleFrom(
-                      minimumSize: Size(160, 50),
+                      minimumSize: Size(160, 60),
                       primary: Color.fromARGB(255, 255, 166, 197),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  onPressed: () => (ImageSource.gallery),
+                  onPressed: () {
+                    getCameraImage();
+                  },
                   child: Text('Camera'),
                 ),
                 SizedBox(
@@ -184,16 +265,17 @@ class Home extends StatelessWidget {
                 ),
                 ElevatedButton(
                   style: buttonPrimary = ElevatedButton.styleFrom(
-                      minimumSize: Size(160, 50),
+                      minimumSize: Size(160, 60),
                       primary: Color(0xFFFFA6C5),
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => imagepickerscreen()));
+                    getImage();
+                    //Navigator.push(
+                    //context,
+                    //MaterialPageRoute(
+                    //builder: (context) => ImagePickerScreen()));
                   },
                   child: Text('Gallery'),
                 ),
