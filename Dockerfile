@@ -1,14 +1,14 @@
-FROM ubuntu
-
-RUN apt-get update -y python-pip python-dev
-
-COPY ./backend/requirements.txt /app/requirements.txt
+FROM python:3.9-slim-buster
 
 WORKDIR /app
 
+COPY prettify/backend/requirements.txt .
+
 RUN pip install -r requirements.txt
 
-COPY . /app
+COPY prettify/backend .
+
+EXPOSE 8080
 
 ENTRYPOINT [ "python" ]
 
