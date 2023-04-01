@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:prettify1/drawer_item.dart';
-import 'package:prettify1/pages/aboutus.dart';
 import 'package:prettify1/pages/settings.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({super.key});
+class NavigationDrawerLeft extends StatelessWidget {
+  const NavigationDrawerLeft({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class NavigationDrawer extends StatelessWidget {
                 color: Colors.grey,
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               DrawerItem(
                   name: 'Exit',
@@ -62,7 +61,7 @@ class NavigationDrawer extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const settings()));
+            context, MaterialPageRoute(builder: (context) =>  settings_screen()));
         break;
     }
   }
@@ -86,7 +85,7 @@ class NavigationDrawer extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14, color: Color.fromARGB(255, 0, 0, 0))),
             SizedBox(
-              height: 10,
+              height: 0,
             ),
             Text('shenalF22@gmail.com',
                 style: TextStyle(
