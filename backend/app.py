@@ -15,10 +15,10 @@ import json
 from bson import json_util
 
 app = Flask(__name__)
-mongo = MongoClient(
-    "mongodb+srv://kaveenSP:u8KzN4q9MdKJlQe4@prettify-user-managemen.refxv8x.mongodb.net/?retryWrites=true&w=majority")
+mongo = MongoClient("mongodb+srv://kaveenSP:u8KzN4q9MdKJlQe4@prettify-user-managemen.refxv8x.mongodb.net/?retryWrites=true&w=majority")
 
 secret_key = "this is the key."
+
 if mongo:
     try:
         # ping the server
@@ -39,14 +39,17 @@ users = db["user"]
 @app.route('/signup', methods=['POST'])
 def signup():
     token = request.headers.get('Authorization')
-    print(token)
-    payload = jwt.decode(token, secret_key, algorithms=['HS256'])
-    print(payload)
+    try:
+        payload = jwt.decode(token, secret_key, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return {"message": "Token has expired"}, 401
+    except jwt.InvalidTokenError:
+        return {"message": "Invalid token"}, 401
     name = payload['name']
 
     password = payload['password']
 
-    # email = payload('email')
+    email = request.json.get('email')
     # encrypt password key
     key = Fernet.generate_key()
     # create a Fernet instance using the key
@@ -56,16 +59,14 @@ def signup():
     if user:
         return jsonify({'error': 'Name already exists'}), 400
 
-        # Encrypt the password
-    # hashed_password = generate_password_hash(password, method='sha256')
-    # password = 'password'
-    hashed_password = fernet.encrypt(password.encode())
+    # Encrypt the password
+    password = fernet.encrypt(password.encode())
 
     # Insert the user into the database
     users.insert_one({
         'name': name,
-        # 'email': email,
-        'password': hashed_password
+        'email': email,
+        'password': password
     })
 
     return jsonify({'message': 'User created successfully'}), 201
@@ -73,12 +74,7 @@ def signup():
 
 @app.route('/signin', methods=['POST'])
 def signin():
-    if 'Authorization' in request.headers and request.headers['Authorization']:
-        token = request.headers['Authorization'].split(' ')[1]
-    else:
-        return jsonify({'error': 'Authorization header is missing or invalid'}), 401
-
-    # token = request.headers.get('Authorization').split(' ')[1]
+    token = request.headers.get('Authorization').split(' ')[1]
     payload = jwt.decode(token, "this is the key.", algorithms=['HS256'])
     name = payload['name']
     password = payload['password']
@@ -92,7 +88,6 @@ def signin():
         return jsonify({'error': 'Invalid username or password'}), 401
 
     # Check if the password is correct
-    # hashed_password = fernet.encrypt(password.encode())
     if not check_password_hash(user['password'], password):
         return jsonify({'error': 'Invalid email or password'}), 401
 
@@ -125,7 +120,6 @@ def find_users(name, password):
         return jsonify({'error': 'Invalid token'}), 401
 
     # Get all the users from the database
-    # users = mongo.db.users.find({}, {'password': 0})
     mongo.db.users.find_one({'name': name})
     # Return the user details
     return jsonify({'message': 'Successful'}), 200
@@ -206,3 +200,4 @@ def upload_image():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
