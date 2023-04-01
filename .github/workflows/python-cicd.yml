@@ -30,7 +30,7 @@ jobs:
           pip install -r backend/requirements.txt
 
       - name: Run Python script
-        run: python app.py
+        run: python backend/app.py
 
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
