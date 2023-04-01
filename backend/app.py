@@ -1,8 +1,9 @@
+import base64
+from flask import Flask, jsonify, request
 import jwt
 from cryptography.fernet import Fernet
-# from PIL import Image
-import json
 from bson import json_util
+from pymongo import MongoClient
 
 app = Flask(__name__)
 mongo = MongoClient(
