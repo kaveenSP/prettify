@@ -30,6 +30,9 @@ db = mongo["prettify"]
 # set the collection name
 users = db["user"]
 
+@app.route('/', methods=['GET'])
+def home():
+    return "<h1>TEST</h1>"
 
 @app.route('/user', methods=['POST'])
 def create_user():
