@@ -1,9 +1,10 @@
 import base64
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 import jwt
 from cryptography.fernet import Fernet
 from bson import json_util
 from pymongo import MongoClient
+from detectAcne import detect_remove_acne
 
 app = Flask(__name__)
 mongo = MongoClient(
@@ -14,15 +15,12 @@ key = bytearray(b'T1TyfXki7C5AFw24EQJZk8PQLhAfhs_eZQC9tUb35-8=')
 # create a Fernet instance using the key
 fernet = Fernet(key)
 
-if mongo:
-    try:
-        # ping the server
-        mongo.server_info()
-        print("Connected successfully!")
-    except:
-        print("Could not connect to server.")
-else:
-    print("Could not connect to database.")
+try:
+    # ping the server
+    mongo.server_info()
+    print("Connected successfully!")
+except:
+    print("Could Not Connect To Database.")
 
 # set the database name
 db = mongo["prettify"]
@@ -32,7 +30,7 @@ users = db["user"]
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>TEST</h1>"
+    return "<h1>PRETTIFY</h1>"
 
 @app.route('/user', methods=['POST'])
 def create_user():
@@ -141,19 +139,21 @@ def update_user(email):
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     # get the uploaded file from the request
-    img_file = request.files['file']
+    img_file = request.files['image']
 
     # read the contents of the file, encode it with base64, and create a BytesIO object
     img_data = base64.b64encode(img_file.read())
     img_bytes = base64.b64decode(img_data)
     # Creating a new file
-    filename = 'new_img.jpg'
+    filename = 'localStorage/unprocessedImage.jpg'
     with open(filename, 'wb') as f:
         f.write(img_bytes)
 
-    # process the image with your machine learning model here
-
-    return 'success'
+    # process the image with machine learning model here
+    processedImage = detect_remove_acne(filename)
+    print(processedImage)
+    return send_file(processedImage, as_attachment=True)
+    # return 'success'
 
 
 if __name__ == '__main__':
