@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prettify1/drawer_item.dart';
+import 'package:prettify1/pages/aboutus.dart';
 import 'package:prettify1/pages/settings.dart';
 
 class NavigationDrawerLeft extends StatelessWidget {
@@ -56,6 +57,8 @@ class NavigationDrawerLeft extends StatelessWidget {
     );
   }
 
+
+//OPENING THE SETTINGS PAGE  FROM THE DRAWER
   void onItemPressed(BuildContext context, {required int index}) {
     Navigator.pop(context);
     switch (index) {
@@ -63,8 +66,32 @@ class NavigationDrawerLeft extends StatelessWidget {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) =>  settings_screen()));
         break;
+      case 1:
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) =>  AboutUs()));
+      
     }
-  }
+  
+
+
+  //OPENING THE ABOUT US PAGE FORM THE DRAWER
+
+
+
+
+
+
+
+
+  // Navigator.pop(context);
+  // switch (index) {
+    // case 1:
+      // Navigator.push(
+          // context, MaterialPageRoute(builder: (context) =>  AboutUs()));
+      // break;
+  // }
+}
+
 
   Widget headerWidget() {
     const url =
