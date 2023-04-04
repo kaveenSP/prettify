@@ -10,7 +10,9 @@ app = Flask(__name__)
 mongo = MongoClient(
     "mongodb+srv://kaveenSP:u8KzN4q9MdKJlQe4@prettify-user-managemen.refxv8x.mongodb.net/?retryWrites=true&w=majority")
 
-secret_key = "this is the key."
+secret_key = "someSecretKey"
+
+
 key = bytearray(b'T1TyfXki7C5AFw24EQJZk8PQLhAfhs_eZQC9tUb35-8=')
 # create a Fernet instance using the key
 fernet = Fernet(key)
@@ -72,7 +74,7 @@ def create_user():
 @app.route('/user', methods=['GET'])
 def find_user():
     token = request.headers.get('Authorization')
-    payload = jwt.decode(token, "this is the key.", algorithms=['HS256'])
+    payload = jwt.decode(token, secret_key.encode, algorithms=['HS256'])
     name = payload['name']
     password = payload['password']
 
