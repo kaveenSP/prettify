@@ -32,8 +32,15 @@ jobs:
       # - name: Run Python script
       #   run: python backend/app.py
 
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 --exclude=venv* --statistics
+
       - name: Unit Test With PyTest
-        run : python backend/test/test_app.py
+        run : |
+          pip install pytest
+          python backend/test/test_app.py
 
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
