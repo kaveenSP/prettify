@@ -46,7 +46,7 @@ jobs:
         run : |
           git add backend/app.py
           pip install pytest
-          python backend/test/test_app.py
+          python backend/test_app.py
 
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4

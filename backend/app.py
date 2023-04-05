@@ -28,11 +28,11 @@ if mongo:
     try:
         # ping the server
         mongo.server_info()
-        print("Connected successfully!")
+        print("Connected To Database Successfully!")
     except:
-        print("Could not connect to server.")
+        print("Could Not Connect To Database.")
 else:
-    print("Could not connect to database.")
+    print("Could Not Connect To Database.")
 
 # set the database name
 db = mongo["prettify"]
