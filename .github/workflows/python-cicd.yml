@@ -36,7 +36,7 @@ jobs:
         run: |
           pip install flake8
           flake8 --extend-ignore=E501 --exit-zero --select=E,W,F app.py
-          git add app.py
+          git add backend/app.py
           flake8 --exclude=venv* --statistics
           git diff-index --quiet HEAD || git commit -m "Fix linting issues [skip ci]"
 
