@@ -24,10 +24,10 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r backend/requirements.txt
 
       # - name: Run Python script
       #   run: python backend/app.py
@@ -35,7 +35,10 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
+          flake8 --extend-ignore=E501 --exit-zero --select=E,W,F app.py
+          git add app.py
           flake8 --exclude=venv* --statistics
+          git diff-index --quiet HEAD || git commit -m "Fix linting issues [skip ci]"
 
       - name: Unit Test With PyTest
         run : |
