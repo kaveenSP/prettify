@@ -35,7 +35,7 @@ def detect_remove_acne(imagePath):
     image = cv2.resize(image, (width, height))
 
     # Save the image on local storage
-    filePath = "processsedImage.jpg"
+    filePath = "localStorage/processsedImage.jpg"
     cv2.imwrite(filePath, cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
     return filePath

@@ -2,13 +2,13 @@ FROM python:3.9-slim-buster
 
 WORKDIR /app
 
-COPY backend/requirements.txt .
+COPY prettify/backend/requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY backend .
+COPY prettify/backend .
 
-EXPOSE 8080
+EXPOSE 8000
 
 ENTRYPOINT [ "python" ]
 

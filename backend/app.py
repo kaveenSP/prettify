@@ -64,7 +64,7 @@ def create_user():
     return jsonify({'message': 'User created successfully'}), 201
 
 
-@app.route('/user', methods=['POST'])
+@app.route('/userLogin', methods=['POST'])
 def find_user():
     name = request.json.get('name')
     password = request.json.get('password')
@@ -141,24 +141,23 @@ def update_user():
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     # get the uploaded file from the request
-    img_file = request.files['file']
+    img_file = request.files['image']
 
     # read the contents of the file, encode it with base64, and create a BytesIO object
     img_data = base64.b64encode(img_file.read())
     img_bytes = base64.b64decode(img_data)
     # Creating a new file
-    filename = 'new_img.jpg'
+    filename = 'localStorage/unprocessedImage.jpg'
     with open(filename, 'wb') as f:
         f.write(img_bytes)
 
     # process the image with machine learning model here
-        processedImage = detect_remove_acne(filename)
-        print(processedImage)
-        return send_file(processedImage, as_attachment=True)
-        return 'success'
+    processedImage = detect_remove_acne(filename)
+    print(processedImage)
+    return send_file(processedImage, as_attachment=True)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', debug=True, port=8000)
 
 
