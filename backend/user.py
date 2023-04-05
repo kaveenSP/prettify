@@ -1,8 +1,7 @@
 class User:
-    def __init__(self, name, email, username=None, password=None):
+    def __init__(self, name, email, password):
         self.name = name
         self.email = email
-        self.username = username
         self.password = password
 
     def __repr__(self):
@@ -26,6 +25,6 @@ class User:
     # def find_by_username(cls, username):
     #     # Code to find a user by username
     #     pass
-    @classmethod
-    def find_by_username(cls, username):
-        return cls.query.filter_by(username=username).first()
+    # @classmethod
+    # def find_by_username(cls, username):
+    #     return cls.query.filter_by(username=username).first()

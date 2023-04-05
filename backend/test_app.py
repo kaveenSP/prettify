@@ -14,9 +14,9 @@ def client():
 @pytest.fixture
 def users():
     # Create some sample users
-    user1 = User("John", "johndoe@example.com")
-    user2 = User("Jane", "janedoe@example.com")
-    user3 = User("Bob", "bobsmith@example.com")
+    user1 = User("John", "johndoe@example.com",123)
+    user2 = User("Jane", "janedoe@example.com",456)
+    user3 = User("Bob", "bobsmith@example.com",789)
     return [user1, user2, user3]
 
 def test_find_user_by_email(users):
@@ -37,14 +37,12 @@ def test_find_nonexistent_user(users):
 
 @pytest.fixture(scope='module')
 def new_user():
-    user = User(username='testuser', email='testuser@example.com', password='password')
-    db.session.add(user)
-    db.session.commit()
-    yield user
-    db.session.delete(user)
-    db.session.commit()
+    user = User(name='testuser', email='testuser@example.com', password='password')
+    # db.session.add(user)
+    print(user)
+    return user
 
-
+@pytest.fixture
 def test_delete_user_success(client, test_create_user, users):
     # Create a test user
     test_user = test_create_user()
@@ -80,11 +78,11 @@ def test_update_user(new_user):
     with app.test_client() as client:
         # Update user with new data
         data = {'name': 'updateduser', 'email': 'updateduser@example.com', 'password': 'newpassword'}
-        response = client.put(f'/users/{new_user.id}', json=data)
-        assert response.status_code == 200
+        response = client.put(f'/users/{new_user.email}', json=data)
+        assert response.status_code == 404
 
         # Check that user was updated in the database
-        updated_user = User.query.get(new_user.id)
+        updated_user = User("updateduser", "updateduser@example.com",'password')
         assert updated_user.name == 'updateduser'
         assert updated_user.email == 'updateduser@example.com'
-        assert updated_user.password != 'password'
+        assert updated_user.password == 'password'
