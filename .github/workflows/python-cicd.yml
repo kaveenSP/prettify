@@ -46,7 +46,7 @@ jobs:
         run : | 
           pip install pytest
           cd backend
-          pytest test-app.py
+          pytest test_app.py
           cd ../
 
       - name: Build & Push Docker Image
