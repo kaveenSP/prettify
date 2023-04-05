@@ -32,6 +32,9 @@ jobs:
       # - name: Run Python script
       #   run: python backend/app.py
 
+      - name: Set PYTHONPATH
+        run: echo "export PYTHONPATH=${PYTHONPATH}:$(pwd)/backend" >> $GITHUB_ENV
+
       - name: Lint with flake8
         run: |
           pip install flake8
@@ -41,6 +44,7 @@ jobs:
 
       - name: Unit Test With PyTest
         run : |
+          git add backend/app.py
           pip install pytest
           python backend/test/test_app.py
 
