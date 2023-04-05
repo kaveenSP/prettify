@@ -19,7 +19,7 @@ app = Flask(__name__)
 mongo = MongoClient(
     "mongodb+srv://kaveenSP:u8KzN4q9MdKJlQe4@prettify-user-managemen.refxv8x.mongodb.net/?retryWrites=true&w=majority")
 
-secret_key = "this is the key."
+secret_key = "#gdY^&983dh%w63NNfgscw"
 key = bytearray(b'T1TyfXki7C5AFw24EQJZk8PQLhAfhs_eZQC9tUb35-8=')
 # create a Fernet instance using the key
 fernet = Fernet(key)
@@ -39,7 +39,6 @@ db = mongo["prettify"]
 
 # set the collection name
 users = db["user"]
-
 
 @app.route('/user', methods=['POST'])
 def create_user():

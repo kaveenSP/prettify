@@ -3,7 +3,7 @@ import torch
 import cv2
 import matplotlib.pyplot as plt
 
-model = torch.hub.load('ultralytics/yolov5', 'custom', 'best.pt')
+model = torch.hub.load('ultralytics/yolov5', 'custom', 'acne_detector.pt')
 
 def detect_remove_acne(imagePath):
     image = cv2.imread(imagePath)
