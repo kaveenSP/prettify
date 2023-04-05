@@ -100,7 +100,7 @@ class NavigationDrawerLeft extends StatelessWidget {
       children: [
         const CircleAvatar(
           radius: 40,
-          backgroundImage: NetworkImage(url),
+          backgroundImage: AssetImage("images/humanAvatar.png"),
         ),
         const SizedBox(
           width: 20,

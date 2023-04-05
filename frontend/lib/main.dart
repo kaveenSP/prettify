@@ -21,7 +21,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
-void main() {
+String baseUrl = '';
+
+main() async {
+  baseUrl = "https://fa22-2402-d000-8104-b606-9530-72e2-e434-233c.in.ngrok.io";
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,

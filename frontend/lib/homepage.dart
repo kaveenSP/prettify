@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prettify1/imagepickerscreen.dart';
+import 'package:prettify1/main.dart';
 import 'package:prettify1/util/category_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,7 +34,7 @@ class Home extends StatelessWidget {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://10.0.2.2:8000/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
+            baseUrl + '/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
       );
 
       
@@ -96,7 +97,7 @@ Future<void> deleteAccount(String email) async {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://10.0.2.2:8000/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
+            baseUrl + '/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
       );
 
       
@@ -308,11 +309,13 @@ Future<void> deleteAccount(String email) async {
                   onPressed: () async{
                     Uint8List? imageBytes = await getCameraImage();
                   
+                    if (imageBytes != null) {
 
                     try{
                       showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imageBytes!),)));
                     }catch (e){
                       showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
+                    }
                     }
                   },
                   child: Text('Camera'),
@@ -327,19 +330,40 @@ Future<void> deleteAccount(String email) async {
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  onPressed: () async{
-                    Uint8List? imagebytes = await getImage();
-                    try{
-                      showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imagebytes!),)));
-                    }catch (e){
-                      showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
-                    }
+                  // onPressed: () async{
+                  //   Uint8List? imagebytes = await getImage();
+                  //   try{
+                  //     showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imagebytes!),)));
+                  //   }catch (e){
+                  //     showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
+                  //   }
                     
-                    //Navigator.push(
-                    //context,
-                    //MaterialPageRoute(
-                    //builder: (context) => ImagePickerScreen()));
-                  },
+                  //   //Navigator.push(
+                  //   //context,
+                  //   //MaterialPageRoute(
+                  //   //builder: (context) => ImagePickerScreen()));
+                  // },
+                  onPressed: () async {
+  Uint8List? imagebytes = await getImage();
+  if (imagebytes != null) {
+    try {
+      showDialog(
+        context: context,
+        builder: ((context) => AlertDialog(
+          content: Image.memory(imagebytes),
+        )),
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: ((context) => AlertDialog(
+          content: Text("something went wrong"),
+        )),
+      );
+    }
+  }
+},
+
                   child: Text('Gallery'),
                 ),
               ],
