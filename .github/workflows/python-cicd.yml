@@ -46,6 +46,7 @@ jobs:
         run : | 
           cd backend
           python test_app.py
+          cd ../
 
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
