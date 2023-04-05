@@ -64,7 +64,7 @@ def create_user():
     return jsonify({'message': 'User created successfully'}), 201
 
 
-@app.route('/user', methods=['GET'])
+@app.route('/user', methods=['POST'])
 def find_user():
     name = request.json.get('name')
     password = request.json.get('password')
