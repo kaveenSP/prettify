@@ -45,7 +45,7 @@ jobs:
       - name: Unit Test With PyTest
         run : | 
           pip install pytest
-          pytest test-app.py
+          pytest backend/test-app.py
           cd ../
 
       - name: Build & Push Docker Image
