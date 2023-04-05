@@ -43,7 +43,9 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Fix linting issues [skip ci]"
 
       - name: Unit Test With PyTest
-        run : python backend/test_app.py
+        run : | 
+          cd backend
+          python test_app.py
 
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
