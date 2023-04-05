@@ -3,6 +3,8 @@ import 'package:lottie/lottie.dart';
 import 'package:prettify1/Fade_Animation.dart';
 import 'package:prettify1/Hex_Color.dart';
 import 'package:prettify1/login/Login_Screen.dart';
+import 'package:prettify1/models/user.dart';
+import 'package:prettify1/services/create_user.dart';
 
 
 
@@ -378,11 +380,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         FadeAnimation(
                           delay: 1,
                           child: TextButton(
-                              onPressed: () {Navigator.push(
+                              onPressed: () async{
+                                Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => LoginScreen()),
-            );},
+            );
+            User newUser = new User(name: nameController.text, password: passwordController.text, email: emailController.text);
+            await ServiceUser.postUser(newUser);
+            },
                               style: TextButton.styleFrom(
+                                
                                   backgroundColor: const Color(0xffec76ae),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),

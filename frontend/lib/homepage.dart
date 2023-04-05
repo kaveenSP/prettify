@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'dart:ui';
 import 'package:http/http.dart' as http;
@@ -18,22 +19,24 @@ import 'imagepickerscreen.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
 
-  Future<void> getImage() async {
+  Future<Uint8List?> getImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     // Do something with the picked image file
     if (pickedFile != null) {
       print(pickedFile.path);
+      
+      // Add the image to the request as a file
+      final file = File(pickedFile.path);
       // Create a multipart request using the http.MultipartRequest class
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'https://example.com/upload'), // replace with your API endpoint
+            'http://10.0.2.2:8000/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
       );
 
-      // Add the image to the request as a file
-      final file = File(pickedFile.path);
+      
       final stream = http.ByteStream(file.openRead());
       final length = await file.length();
       final multipartFile = http.MultipartFile('image', stream, length,
@@ -41,15 +44,27 @@ class Home extends StatelessWidget {
       request.files.add(multipartFile);
 
       // Send the request
-      final response = await request.send();
+      try{
+        final response = await request.send();
+        if (response.statusCode == 200) {
+         // Get the image bytes from the response
+      final bytes = await response.stream.toBytes();
+      // Create a Uint8List from the image bytes
+      final imageBytes = Uint8List.fromList(bytes);
+      // Return the image bytes
 
-      if (response.statusCode == 200) {
-        // Handle the response from the backend
-        // ...
+      
+      return imageBytes;
       } else {
         // Handle errors
         // ...
       }
+      }catch(e){
+        print(e);
+      }
+      
+
+      
     }
   }
 
@@ -67,13 +82,53 @@ Future<void> deleteAccount(String email) async {
   //END OF DELETE ACCOUNT FLUTTER SERVICE
 
 
-  Future<void> getCameraImage() async {
+  Future<Uint8List?> getCameraImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
-   // Do something with the picked image file
+    // Do something with the picked image file
     if (pickedFile != null) {
       print(pickedFile.path);
+     
+      // Add the image to the request as a file
+      final file = File(pickedFile.path);
+      // Create a multipart request using the http.MultipartRequest class
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'http://10.0.2.2:8000/upload_image'), // replace with your API endpoint  //10.0.2.2 is only for emulator
+      );
+
+      
+      final stream = http.ByteStream(file.openRead());
+      final length = await file.length();
+      final multipartFile = http.MultipartFile('image', stream, length,
+          filename: path.basename(file.path));
+      request.files.add(multipartFile);
+
+      // Send the request
+      try{
+        final response = await request.send();
+      if (response.statusCode == 200) {
+      // Get the image bytes from the response
+      final bytes = await response.stream.toBytes();
+      // Create a Uint8List from the image bytes
+      final imageBytes = Uint8List.fromList(bytes);
+      // Return the image bytes
+
+      
+      return imageBytes;
+    } else {
+      // Handle errors
+      return null;
+    }
+      }catch(e){
+        print(e);
+      }
+      
+
+    }else{
+      return null;
     }
   }
 
@@ -250,8 +305,15 @@ Future<void> deleteAccount(String email) async {
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  onPressed: () {
-                    getCameraImage();
+                  onPressed: () async{
+                    Uint8List? imageBytes = await getCameraImage();
+                  
+
+                    try{
+                      showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imageBytes!),)));
+                    }catch (e){
+                      showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
+                    }
                   },
                   child: Text('Camera'),
                 ),
@@ -265,8 +327,14 @@ Future<void> deleteAccount(String email) async {
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  onPressed: () {
-                    getImage();
+                  onPressed: () async{
+                    Uint8List? imagebytes = await getImage();
+                    try{
+                      showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imagebytes!),)));
+                    }catch (e){
+                      showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
+                    }
+                    
                     //Navigator.push(
                     //context,
                     //MaterialPageRoute(

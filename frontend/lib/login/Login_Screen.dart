@@ -5,6 +5,8 @@ import 'package:prettify1/homepage.dart';
 import 'package:prettify1/login/Forgot_Password_Screen.dart';
 import 'package:prettify1/login/SignUp_Screen.dart';
 import 'package:prettify1/main.dart';
+import 'package:prettify1/models/loginUser.dart';
+import 'package:prettify1/services/create_user.dart';
 
 
 
@@ -211,12 +213,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         FadeAnimation(
                           delay: 1,
                           child: TextButton(
-                              onPressed: () {
+                              onPressed: () async{
                                 Navigator.pop(context);
-                                Navigator.of(context)
+                               
+                                LoginUser newLoginUser = new LoginUser(name: emailController.text, password: passwordController.text);
+                                var isLegit = await ServiceUser.getUser(newLoginUser);
+                                if (isLegit){
+                                   Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
                                   return Home();
                                 }));
+                                } else{
+                                  showDialog(context: context, builder: (context)=> AlertDialog(content: Text("Wrong user"),));
+                                }
                               },
                               style: TextButton.styleFrom(
                                   backgroundColor: const Color(0xFFFFA6C5),

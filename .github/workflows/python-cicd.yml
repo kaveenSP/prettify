@@ -32,15 +32,15 @@ jobs:
       # # - name: Run Python script
       # #   run: python backend/app.py
 
-      # - name: Set PYTHONPATH
-      #   run: echo "export PYTHONPATH=${PYTHONPATH}:$(pwd)/backend" >> $GITHUB_ENV
+      - name: Set PYTHONPATH
+        run: echo "export PYTHONPATH=${PYTHONPATH}:$(pwd)/backend" >> $GITHUB_ENV
 
-      # - name: Lint with flake8
-      #   run: |
-      #     pip install flake8
-      #     flake8 --extend-ignore=E501 --exit-zero --select=E,W,F app.py
-      #     git add backend/app.py
-      #     git diff-index --quiet HEAD || git commit -m "Fix linting issues [skip ci]"
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 --extend-ignore=E501 --exit-zero --select=E,W,F app.py
+          git add backend/app.py
+          git diff-index --quiet HEAD || git commit -m "Fix linting issues [skip ci]"
 
       - name: Unit Test With PyTest
         run : | 
