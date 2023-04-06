@@ -24,7 +24,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 String baseUrl = '';
 
 main() async {
-  baseUrl = "https://eaf3-2402-4000-2380-58da-f498-fb86-aada-f15a.in.ngrok.io";
+  baseUrl = "https://94d0-112-134-149-113.in.ngrok.io";
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
