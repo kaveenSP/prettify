@@ -272,7 +272,7 @@ class NewPage extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical:10),
               child: ElevatedButton.icon(
                 icon: Icon(Icons.login),
                 label: Text(
@@ -289,14 +289,14 @@ class NewPage extends StatelessWidget {
                     onPrimary: Colors.white,
                     minimumSize: Size(double.infinity, 60),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(12.0),
                     )),
               ),
             ),
             SizedBox(height: 16.0),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+                  const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10),
               child: ElevatedButton.icon(
                 icon: Icon(Icons.person_add),
                 label: Text(
@@ -313,13 +313,13 @@ class NewPage extends StatelessWidget {
                     onPrimary: Colors.white,
                     minimumSize: Size(double.infinity, 60),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(12.0),
                     )),
               ),
             ),
             SizedBox(height: 16.0),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 10),
               child: ElevatedButton.icon(
                 icon: Icon(Icons.person),
                 label: Text(
@@ -336,7 +336,7 @@ class NewPage extends StatelessWidget {
                     onPrimary: Colors.white,
                     minimumSize: Size(double.infinity, 60),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(12.0),
                     )),
               ),
             ),
