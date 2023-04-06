@@ -8,12 +8,7 @@ import 'package:prettify1/main.dart';
 import 'package:prettify1/models/loginUser.dart';
 import 'package:prettify1/services/create_user.dart';
 
-
-
 import '../Hex_Color.dart';
-
-
-
 
 enum FormData {
   Email,
@@ -60,8 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                      const Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   child: Container(
                     width: 400,
                     padding: const EdgeInsets.all(40),
@@ -87,8 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             "Please log in to continue",
                             style: TextStyle(
-                              fontSize: 20,
-                                color: Colors.black, letterSpacing: 0.5),
+                                fontSize: 20,
+                                color: Colors.black,
+                                letterSpacing: 0.5),
                           ),
                         ),
                         const SizedBox(
@@ -123,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       : deaible,
                                   size: 20,
                                 ),
-                                hintText: 'Email',
+                                hintText: 'Name',
                                 hintStyle: TextStyle(
                                     color: selected == FormData.Email
                                         ? enabledtxt
@@ -213,25 +208,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         FadeAnimation(
                           delay: 1,
                           child: TextButton(
-                              onPressed: () async{
+                              onPressed: () async {
                                 Navigator.pop(context);
-                               
-                                LoginUser newLoginUser = new LoginUser(name: emailController.text, password: passwordController.text);
-                                var isLegit = await ServiceUser.getUser(newLoginUser);
-                                if (isLegit){
-                                   Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return Home();
-                                }));
-                                } else{
-                                  showDialog(context: context, builder: (context)=> AlertDialog(content: Text("Wrong user"),));
+
+                                LoginUser newLoginUser = new LoginUser(
+                                    name: emailController.text,
+                                    password: passwordController.text);
+                                var isLegit =
+                                    await ServiceUser.getUser(newLoginUser);
+                                if (isLegit) {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return Home();
+                                  }));
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            content: Text("Wrong user"),
+                                          ));
                                 }
                               },
                               style: TextButton.styleFrom(
                                   backgroundColor: const Color(0xFFFFA6C5),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
-
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(12.0))),
