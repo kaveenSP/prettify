@@ -225,7 +225,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                            content: Text("Wrong user"),
+                                            content: Text(
+                                                "Incorrect USername and Password !"),
                                           ));
                                 }
                               },
