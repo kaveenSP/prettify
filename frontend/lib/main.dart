@@ -105,7 +105,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                                   width: 50.0,
                                   height: 50.0,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFF7C8E0),
+                                    color: Color(0xFFFFA6C5),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(
@@ -195,7 +195,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 ),
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFFF7C8E0)),
+                      MaterialStateProperty.all<Color>(Color(0xFFFFA6C5)),
                   fixedSize: MaterialStateProperty.all<Size>(Size(350, 50)),
                 ),
                 onPressed: () {
@@ -235,7 +235,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
 class NewPage extends StatelessWidget {
   const NewPage({Key? key}) : super(key: key);
 
-  final Color pink = const Color(0xFFF7C8E0);
+  final Color pink = const Color(0xFFFFA6C5);
   final Color green = const Color(0xFFDFFFD8);
   final Color blue = const Color(0xFFB4E4FF);
   final Color darkBlue = const Color(0xFF95BDFF);
