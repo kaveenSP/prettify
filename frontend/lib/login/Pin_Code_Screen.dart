@@ -242,7 +242,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                             TextButton(
                               onPressed: () => snackBar("OTP resend!!"),
                               child: const Text(
-                                "RESEND",
+                                "Resend",
                                 style: TextStyle(
                                     color: Color(0xffffffff),
                                     fontWeight: FontWeight.bold,
