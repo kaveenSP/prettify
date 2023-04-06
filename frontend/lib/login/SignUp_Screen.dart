@@ -117,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       : deaible,
                                   size: 20,
                                 ),
-                                hintText: 'Full Name',
+                                hintText: 'Name',
                                 hintStyle: TextStyle(
                                     color: selected == FormData.Name
                                         ? enabledtxt
