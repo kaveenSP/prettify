@@ -80,7 +80,10 @@ def find_user():
         return jsonify({'error': 'Invalid Password'}), 401
     else:
         # Return the user's information
-        return dumps(result), 200
+        return jsonify({
+            'name':result.get('name'),
+            'email':result.get('email')
+        }), 200
 
 
 @app.route('/user', methods=['DELETE'])
