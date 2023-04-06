@@ -266,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return ForgotPasswordScreen();
                       }));
                     }),
-                    child: const Text("Forget Password",
+                    child: const Text("Forgot Password",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,

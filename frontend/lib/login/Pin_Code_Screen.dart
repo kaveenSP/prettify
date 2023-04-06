@@ -7,10 +7,6 @@ import 'package:prettify1/Fade_Animation.dart';
 import 'package:prettify1/Hex_Color.dart';
 import 'package:prettify1/login/Login_Screen.dart';
 
-
-
-
-
 class PinCodeVerificationScreen extends StatefulWidget {
   final String? phoneNumber;
 
@@ -65,10 +61,10 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
             end: Alignment.bottomRight,
             stops: const [0.1, 0.4, 0.7, 0.9],
             colors: [
-              HexColor("#B4E4FF"),
-              HexColor("#F7C8E0"),
-              HexColor("#B4E4FF"),
-              HexColor("#F7C8E0")
+              HexColor("#FFFFA6C5"),
+              HexColor("#FFFFA6C5"),
+              HexColor("#FFFFA6C5"),
+              HexColor("#FFFFA6C5")
             ],
           ),
           image: DecorationImage(
@@ -87,8 +83,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                      const Color.fromARGB(255, 236, 118, 174),
+                  color: const Color.fromARGB(255, 236, 118, 174),
                   child: Container(
                     width: 500,
                     padding: const EdgeInsets.all(30.0),

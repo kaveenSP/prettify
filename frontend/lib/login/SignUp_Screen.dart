@@ -6,10 +6,6 @@ import 'package:prettify1/login/Login_Screen.dart';
 import 'package:prettify1/models/user.dart';
 import 'package:prettify1/services/create_user.dart';
 
-
-
-
-
 enum FormData { Name, Phone, Email, Gender, password, ConfirmPassword }
 
 class SignupScreen extends StatefulWidget {
@@ -56,8 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 Card(
                   elevation: 5,
-                  color:
-                  const Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   child: Container(
                     width: 400,
                     padding: const EdgeInsets.all(40.0),
@@ -122,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       : deaible,
                                   size: 20,
                                 ),
-                                hintText: 'Full Name',
+                                hintText: 'Name',
                                 hintStyle: TextStyle(
                                     color: selected == FormData.Name
                                         ? enabledtxt
@@ -171,7 +166,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       : deaible,
                                   size: 20,
                                 ),
-                                hintText: 'Phone Number',
+                                hintText: 'Tele Phone Number',
                                 hintStyle: TextStyle(
                                     color: selected == FormData.Phone
                                         ? enabledtxt
@@ -220,7 +215,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       : deaible,
                                   size: 20,
                                 ),
-                                hintText: 'Email',
+                                hintText: 'E-mail',
                                 hintStyle: TextStyle(
                                     color: selected == FormData.Email
                                         ? enabledtxt
@@ -271,21 +266,21 @@ class _SignupScreenState extends State<SignupScreen> {
                                   suffixIcon: IconButton(
                                     icon: ispasswordev
                                         ? Icon(
-                                      Icons.visibility_off,
-                                      color: selected == FormData.password
-                                          ? enabledtxt
-                                          : deaible,
-                                      size: 20,
-                                    )
+                                            Icons.visibility_off,
+                                            color: selected == FormData.password
+                                                ? enabledtxt
+                                                : deaible,
+                                            size: 20,
+                                          )
                                         : Icon(
-                                      Icons.visibility,
-                                      color: selected == FormData.password
-                                          ? enabledtxt
-                                          : deaible,
-                                      size: 20,
-                                    ),
+                                            Icons.visibility,
+                                            color: selected == FormData.password
+                                                ? enabledtxt
+                                                : deaible,
+                                            size: 20,
+                                          ),
                                     onPressed: () => setState(
-                                            () => ispasswordev = !ispasswordev),
+                                        () => ispasswordev = !ispasswordev),
                                   ),
                                   hintText: 'Password',
                                   hintStyle: TextStyle(
@@ -338,30 +333,30 @@ class _SignupScreenState extends State<SignupScreen> {
                                   suffixIcon: IconButton(
                                     icon: ispasswordev
                                         ? Icon(
-                                      Icons.visibility_off,
-                                      color: selected ==
-                                          FormData.ConfirmPassword
-                                          ? enabledtxt
-                                          : deaible,
-                                      size: 20,
-                                    )
+                                            Icons.visibility_off,
+                                            color: selected ==
+                                                    FormData.ConfirmPassword
+                                                ? enabledtxt
+                                                : deaible,
+                                            size: 20,
+                                          )
                                         : Icon(
-                                      Icons.visibility,
-                                      color: selected ==
-                                          FormData.ConfirmPassword
-                                          ? enabledtxt
-                                          : deaible,
-                                      size: 20,
-                                    ),
+                                            Icons.visibility,
+                                            color: selected ==
+                                                    FormData.ConfirmPassword
+                                                ? enabledtxt
+                                                : deaible,
+                                            size: 20,
+                                          ),
                                     onPressed: () => setState(
-                                            () => ispasswordev = !ispasswordev),
+                                        () => ispasswordev = !ispasswordev),
                                   ),
                                   hintText: 'Confirm Password',
                                   hintStyle: TextStyle(
                                       color:
-                                      selected == FormData.ConfirmPassword
-                                          ? enabledtxt
-                                          : deaible,
+                                          selected == FormData.ConfirmPassword
+                                              ? enabledtxt
+                                              : deaible,
                                       fontSize: 12)),
                               obscureText: ispasswordev,
                               textAlignVertical: TextAlignVertical.center,
@@ -380,22 +375,25 @@ class _SignupScreenState extends State<SignupScreen> {
                         FadeAnimation(
                           delay: 1,
                           child: TextButton(
-                              onPressed: () async{
+                              onPressed: () async {
                                 Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
-            User newUser = new User(name: nameController.text, password: passwordController.text, email: emailController.text);
-            await ServiceUser.postUser(newUser);
-            },
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()),
+                                );
+                                User newUser = new User(
+                                    name: nameController.text,
+                                    password: passwordController.text,
+                                    email: emailController.text);
+                                await ServiceUser.postUser(newUser);
+                              },
                               style: TextButton.styleFrom(
-                                
                                   backgroundColor: const Color(0xffec76ae),
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14.0, horizontal: 80),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(12.0))),
+                                          BorderRadius.circular(12.0))),
                               child: const Text(
                                 "Sign Up",
                                 style: TextStyle(
