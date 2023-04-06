@@ -48,6 +48,8 @@ dependencies:
   build_runner: ^2.1.11
   build_web_compilers: ^3.2.3
   pin_code_fields: ^7.4.0
+  flutter_downloader: ^1.10.2
+  image_gallery_saver: ^1.7.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0

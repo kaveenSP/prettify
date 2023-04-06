@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:path/path.dart' as path;
 import 'dart:ui';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prettify1/imagepickerscreen.dart';
@@ -14,12 +13,14 @@ import 'package:http/http.dart' as http;
 import 'navigation_drawer.dart';
 import 'package:lottie/lottie.dart';
 import 'imagepickerscreen.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-
+Uint8List? imageBytes;
 
 class Home extends StatelessWidget {
+  
   const Home({super.key});
-
+  
   Future<Uint8List?> getImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -115,10 +116,9 @@ Future<void> deleteAccount(String email) async {
       final bytes = await response.stream.toBytes();
       // Create a Uint8List from the image bytes
       final imageBytes = Uint8List.fromList(bytes);
-      // Return the image bytes
-
-      
+      // Return the image bytes   
       return imageBytes;
+
     } else {
       // Handle errors
       return null;
@@ -131,6 +131,10 @@ Future<void> deleteAccount(String email) async {
     }else{
       return null;
     }
+  }
+
+  Future<void> saveimage() async {
+    final result = await ImageGallerySaver.saveImage(imageBytes!);
   }
 
   @override
@@ -307,15 +311,44 @@ Future<void> deleteAccount(String email) async {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
                   onPressed: () async{
-                    Uint8List? imageBytes = await getCameraImage();
+                    imageBytes = await getCameraImage();
                   
                     if (imageBytes != null) {
+                        try {
+      showDialog(
+        context: context,
+        builder: ((context) => AlertDialog(
+          content: Image.memory(imageBytes!),
+          actions: 
+          <Widget>[
+            Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(style: buttonPrimary = ElevatedButton.styleFrom(
+                      minimumSize: Size(160, 40),
+                      primary: Color(0xFFFFA6C5),elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)))),
+                            onPressed:() {
+                              saveimage();
+                              Navigator.of(context).pop();
+                              }, 
+                              child: Text("Save"))
+            ],
+          ),
+          
+          ],
+        )),
+      );
 
-                    try{
-                      showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imageBytes!),)));
-                    }catch (e){
-                      showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
-                    }
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: ((context) => AlertDialog(
+          content: Text("something went wrong"),
+        )),
+      );
+    }
                     }
                   },
                   child: Text('Camera'),
@@ -330,29 +363,36 @@ Future<void> deleteAccount(String email) async {
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)))),
-                  // onPressed: () async{
-                  //   Uint8List? imagebytes = await getImage();
-                  //   try{
-                  //     showDialog(context: context, builder: ((context) => AlertDialog(content: Image.memory(imagebytes!),)));
-                  //   }catch (e){
-                  //     showDialog(context: context, builder: ((context) => AlertDialog(content: Text("something went wrong"),)));
-                  //   }
-                    
-                  //   //Navigator.push(
-                  //   //context,
-                  //   //MaterialPageRoute(
-                  //   //builder: (context) => ImagePickerScreen()));
-                  // },
                   onPressed: () async {
-  Uint8List? imagebytes = await getImage();
-  if (imagebytes != null) {
+  imageBytes = await getImage();
+  if (imageBytes != null) {
     try {
       showDialog(
         context: context,
         builder: ((context) => AlertDialog(
-          content: Image.memory(imagebytes),
+          content: Image.memory(imageBytes!),
+          actions: 
+          <Widget>[
+            Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(style: buttonPrimary = ElevatedButton.styleFrom(
+                      minimumSize: Size(160, 40),
+                      primary: Color(0xFFFFA6C5),elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)))),
+                            onPressed:() {
+                              saveimage();
+                              Navigator.of(context).pop();
+                              }, 
+                              child: Text("Save"))
+            ],
+          ),
+          
+          ],
         )),
       );
+
     } catch (e) {
       showDialog(
         context: context,
@@ -368,7 +408,7 @@ Future<void> deleteAccount(String email) async {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
