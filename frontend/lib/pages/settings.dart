@@ -38,21 +38,21 @@ class settings_screen extends StatelessWidget {
                   height: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: const Image(image: AssetImage("images/avatar.png")),
+                    child: const Image(image: AssetImage("images/humanAvatar.png")),
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Shenal Fernando",
+                  "Guest User",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  "shenalF22@gmail.com",
+                  "",
                   style: TextStyle(
                     fontSize: 16,
                   ),
