@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enabledBorder: InputBorder.none,
                                 border: InputBorder.none,
                                 prefixIcon: Icon(
-                                  Icons.email_outlined,
+                                  Icons.person_2_outlined,
                                   color: selected == FormData.Email
                                       ? enabledtxt
                                       : deaible,
