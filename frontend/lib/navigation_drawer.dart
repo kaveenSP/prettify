@@ -108,13 +108,13 @@ class NavigationDrawerLeft extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Shenal Fernando',
+            Text('Guest User',
                 style: TextStyle(
                     fontSize: 14, color: Color.fromARGB(255, 0, 0, 0))),
             SizedBox(
               height: 0,
             ),
-            Text('shenalF22@gmail.com',
+            Text('',
                 style: TextStyle(
                     fontSize: 14, color: Color.fromARGB(255, 3, 3, 3)))
           ],
